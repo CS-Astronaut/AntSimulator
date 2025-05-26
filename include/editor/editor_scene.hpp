@@ -102,7 +102,7 @@ struct EditorScene : public GUI::Scene
             this->renderer->current_time_state = time_controls->current_state;
             this->control_state.updating = time_controls->current_state == TimeController::State::Play;
             if (time_controls->tool_speed->getState()) {
-                this->window.setFramerateLimit(1000);
+                this->window.setFramerateLimit(100);
             } else {
                 this->window.setFramerateLimit(60);
             }

@@ -17,8 +17,8 @@ struct ToolOption : public GUI::Button
     
     ToolOption(const std::string& text, GUI::ButtonCallBack callback)
         : GUI::Button(text, callback)
-    {
-        select_padding.setSpeed(3.0f);
+    { // was 3.0f but for sake of presentation, it's 7.0f
+        select_padding.setSpeed(7.0f);
     }
     
     void select()
