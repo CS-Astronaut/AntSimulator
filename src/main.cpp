@@ -25,6 +25,7 @@ int main()
 	window.setFramerateLimit(60);
     // Initialize simulation
     Simulation simulation(window);
+    simulation.loadMap("my_map.png");
     // Create editor scene around it
     GUI::Scene::Ptr scene = create<edtr::EditorScene>(window, simulation);
     scene->resize();
