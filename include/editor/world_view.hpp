@@ -86,9 +86,15 @@ struct WorldView : GUI::Item
 
     void update() override
     {
-        const float dt = 0.016f;
+        const float base_dt = 0.016f;
+        const int speed_multiplier = current_time_state == TimeController::State::Play ? 
+            (control_state.updating ? (control_state.simulation.ev_state.fullspeed ? 10 : 3) : 3) : 0;  // 3x normal speed, 10x full speed
+        
         if (current_time_state == TimeController::State::Play) {
-            simulation.update(dt);
+            // Run multiple smaller updates instead of one large update
+            for (int i = 0; i < speed_multiplier; ++i) {
+                simulation.update(base_dt);
+            }
         }
     }
 };

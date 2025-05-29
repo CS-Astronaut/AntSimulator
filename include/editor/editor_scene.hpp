@@ -101,11 +101,10 @@ struct EditorScene : public GUI::Scene
         watch(time_controls, [this, time_controls](){
             this->renderer->current_time_state = time_controls->current_state;
             this->control_state.updating = time_controls->current_state == TimeController::State::Play;
-            if (time_controls->tool_speed->getState()) {
-                this->window.setFramerateLimit(100);
-            } else {
-                this->window.setFramerateLimit(60);
-            }
+            // Set a reasonable FPS limit that won't consume too much CPU
+            this->window.setFramerateLimit(60);
+            // Connect speed button to simulation event state
+            this->simulation.ev_state.fullspeed = time_controls->tool_speed->getState();
         });
 
         control_state.request_edits_off = [tools_toggle]{
